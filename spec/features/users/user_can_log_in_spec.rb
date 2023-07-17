@@ -28,8 +28,10 @@ RSpec.describe 'Loggin In' do
     fill_in :email, with: user.email 
     fill_in :password, with: "mint choco chimp"
 
+    click_on "Log In"
+
     expect(current_path).to eq(login_path)
-    # expect(page).to have_content("Oops username or password is wrong, nice try lil chump")
+    expect(page).to have_content("Oops username or password is wrong, nice try lil chump")
   end
   
 end
