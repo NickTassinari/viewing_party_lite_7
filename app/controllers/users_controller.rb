@@ -7,14 +7,13 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
-    if @user.valid?
-      @user.save
-      redirect_to(user_path(@user))
-    else
-      error_message = @user.errors.full_messages
-      flash[:error] = error_message
-      redirect_to register_path
+    if User.exists?(email: @user.email)
+      flash[:notice] = "Email already exists"
+      redirect_to "/register"
+    elsif @user.save 
+      redirect_to "/users/#{@user.id}"
+    else   
+      render :new 
     end
   end
 
