@@ -30,6 +30,7 @@ RSpec.describe '/register', type: :feature do
       click_button 'Register'
 
       expect(current_path).to_not eq('/register')
+      expect(page).to have_content("John Jacob Jingleheimer Schmidt's Dashboard") 
     end
 
     it 'if email validation fails, try again' do

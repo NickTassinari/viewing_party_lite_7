@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   root 'landing#index'
 
-  # get '/register', to: 'users#new', as: 'register'
+  post '/register', to: 'users#new', as: 'register'
   get '/users/:user_id/movies/:movie_id/viewing-party/new', to: 'viewing_parties#new', as: 'new_viewing_party'
   get "/login", to: "users#login_form"
   post "/login", to: "users#login"
