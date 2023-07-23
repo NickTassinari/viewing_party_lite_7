@@ -4,7 +4,7 @@
   <%= link_to "Log Out", logout_path, method: :delete %>
   <ul class="user-list">
     <% @users.each do |user| %>
-      <%= link_to "#{user.name}", "/users/#{user.id}" %>
+      <p><%= user.email %></p>
     <% end %>
   </ul>
 <% else %>

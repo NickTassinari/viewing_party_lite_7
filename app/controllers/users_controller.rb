@@ -2,7 +2,13 @@
 
 class UsersController < ApplicationController
   def show
-    @user = User.find(params[:id])
+    if current_user
+      @user = User.find(current_user.id)
+      @facade = MovieFacade 
+    else   
+      flash[:error] = "Log in to view this page"
+      redirect_to root_path
+    end 
   end
 
   def create
@@ -26,17 +32,25 @@ class UsersController < ApplicationController
 
   def login 
     user = User.find_by(email: params[:email])
-    if user.nil? 
-      flash[:notice] = "Oops username or password is wrong, nice try lil chump"
-      render :login_form
-    elsif user.authenticate(params[:password])
+
+    if user.authenticate(params[:password])
       session[:user_id] = user.id 
-      flash[:success] = "Welcome, #{user.name}!"
-      redirect_to user_path(user)
-    else
-      flash[:notice] = "Oops username or password is wrong, nice try lil chump"
-      render :login_form
+      redirect_to dashboard_path
+    else  
+      flash[:error] = "Oops username or password is wrong, nice try lil chump"
+      redirect_to login_path
     end
+    # if user.nil? 
+    #   flash[:notice] = "Oops username or password is wrong, nice try lil chump"
+    #   render :login_form
+    # elsif user.authenticate(params[:password])
+    #   session[:user_id] = user.id 
+    #   flash[:success] = "Welcome, #{user.name}!"
+    #   redirect_to user_path(user)
+    # else
+    #   flash[:notice] = "Oops username or password is wrong, nice try lil chump"
+    #   render :login_form
+    # end
   end
 
   private
