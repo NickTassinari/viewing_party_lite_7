@@ -12,10 +12,10 @@
 
   <body>
     <%= link_to "Return Home", "/" %> 
+    <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, class: name %>
+    <% end %>
     <%= yield %>
-    <% flash.each do |type, notice| %>
-          <h5 class="text-info"><b><%= notice %></b></h5>
-        <% end %>
   </body>
 
 

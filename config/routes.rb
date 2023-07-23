@@ -7,13 +7,17 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   root 'landing#index'
-
-  get '/register', to: 'users#new', as: 'register'
+  get "/dashboard", to: "users#show"
+  post '/register', to: 'users#new', as: 'register'
   get '/users/:user_id/movies/:movie_id/viewing-party/new', to: 'viewing_parties#new', as: 'new_viewing_party'
-  
+  get "/login", to: "users#login_form"
+  post "/login", to: "users#login"
+
+  get "/logout", to: "sessions#logout"
+  delete "/logout", to: "sessions#logout"
   # post '/users/:user_id/movies/:movie_id/viewing_parties', to: 'viewing_parties#create'
   
-  resources :users, only: [:create, :show] do
+  resources :users, only: [:new, :create, :show] do
     resources :discover, only: [:index]
     resources :movies, only: [:index, :show]
     resources :viewing_parties, only: [:create]

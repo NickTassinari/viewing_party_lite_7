@@ -1,11 +1,15 @@
 <h3>Register a New User<h3>
 
-<%= form_with model: @user, method: :post, url: users_path do |f| %>
+<%= form_with model: @user, method: :post do |f| %>
   <h4><%= f.label :name, 'Name:'%></h4>
   <%= f.text_field :name %><br>
 
   <h4><%= f.label :email, 'Email:'%></h4>
   <%= f.text_field :email %><br>
-  
+
+  <h4><%= f.label :password, "Password:" %></h4>
+    <%= f.text_field :password %><br>
+  <h4><%= f.label :password_confirmation, "Password Confirmation:" %></h4>
+    <%= f.text_field :password_confirmation %>
   <%= f.submit 'Register' %>
 <% end %>
